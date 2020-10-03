@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,28 +25,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-         * I'm sure there's a good way to list all Views within the layout and get their id's.
-         * Seems its not so trivial though, so I will do it like this:
-         *
-         * 1) Manually make a list of all TextViews.
-         * 2) Iterate through it and only add item if there are empty slots...
-         * */
-
-        // Keep track of id for all relevant TextViews.
-
         if (textViewIdArrayList == null) {
+            // Iterate through views inside LinearLayout (contains the TextViews for items).
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.text_scroller);
+            final int childCount = linearLayout.getChildCount();
             textViewIdArrayList = new ArrayList<Integer>(10);
-            textViewIdArrayList.add(R.id.text_view_item_1);
-            textViewIdArrayList.add(R.id.text_view_item_2);
-            textViewIdArrayList.add(R.id.text_view_item_3);
-            textViewIdArrayList.add(R.id.text_view_item_4);
-            textViewIdArrayList.add(R.id.text_view_item_5);
-            textViewIdArrayList.add(R.id.text_view_item_6);
-            textViewIdArrayList.add(R.id.text_view_item_7);
-            textViewIdArrayList.add(R.id.text_view_item_8);
-            textViewIdArrayList.add(R.id.text_view_item_9);
-            textViewIdArrayList.add(R.id.text_view_item_10);
+            TextView textView = null;
+            for (int i = 0; i < childCount; i++) {
+                textView = (TextView) linearLayout.getChildAt(i);
+                textViewIdArrayList.add(textView.getId());
+            }
         }
 
         // Fill each TextView with the corresponding saved String.
@@ -75,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 // Iterate through TextViews, if empty: add newly selected String.
                 // Eventually, every TextView will be taken.
                 TextView textView = null;
-                for (Integer id : textViewIdArrayList){
+                for (Integer id : textViewIdArrayList) {
                     textView = (TextView) findViewById(id);
-                    if (textView.getText().equals("")){
+                    if (textView.getText().equals("")) {
                         textView.setText(data.getStringExtra(SelectItem.EXTRA_REPLY));
                         // Break out of the for loop, ony one new item is added at a time.
                         break;
