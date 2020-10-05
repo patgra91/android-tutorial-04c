@@ -11,4 +11,6 @@
     <string name="text_text_view_item_8"></string>
     <string name="text_text_view_item_9"></string>
     <string name="text_text_view_item_10"></string>
+    <string name="button_find_string">Find</string>
+    <string name="edittext_hint_store">Enter a store name</string>
 </resources>

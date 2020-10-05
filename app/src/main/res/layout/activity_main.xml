@@ -38,8 +38,10 @@
     <LinearLayout
         android:id="@+id/text_scroller"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/edittext_find_store"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_title">
 
@@ -153,4 +155,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_item_9" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_find_store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onButtonFindStore"
+        android:text="@string/button_find_string"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_item"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/edittext_find_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="@string/edittext_hint_store"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_item"
+        app:layout_constraintEnd_toStartOf="@+id/button_find_store"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

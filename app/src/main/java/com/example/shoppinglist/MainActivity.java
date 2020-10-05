@@ -5,10 +5,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -85,6 +87,19 @@ public class MainActivity extends AppCompatActivity {
             if (!textView.getText().equals("")) {
                 outState.putString(String.valueOf(id), textView.getText().toString());
             }
+        }
+    }
+
+    public void onButtonFindStore(View view) {
+        EditText editText = findViewById(R.id.edittext_find_store);
+        String loc = editText.getText().toString();
+        Uri webpage = Uri.parse("geo:0,0?q=" + loc);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Log.d("ShoppingList", "Failed to resolve intent: onButtonFindStore()");
         }
     }
 }
